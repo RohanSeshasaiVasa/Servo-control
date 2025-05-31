@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Servo Control</title>
+</head>
+<body>
+  <h1>Control Servo</h1>
+  <label for="servoRange">Servo Angle:</label>
+  <input type="range" min="0" max="180" id="servoRange" title="Set servo angle" oninput="updateServo(this.value)">
+  <script>
+    function updateServo(angle) {
+      fetch(`/move/?angle=${angle}`)
+        .then(response => response.json())
+        .then(data => console.log(data));
+    }
+  </script>
+</body>
+</html>
