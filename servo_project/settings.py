@@ -1,6 +1,9 @@
 SECRET_KEY = 'fake-key'
 DEBUG = True
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+	'192.168.0.250',
+	'hamaralabs-rl.hamaralabs.com'
+]
 
 INSTALLED_APPS = [
     'django.contrib.contenttypes',
