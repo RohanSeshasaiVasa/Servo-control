@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Servo & Camera Control</title>
+  <title>Dual Servo & Camera Control</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -23,11 +23,18 @@
   </style>
 </head>
 <body>
-  <h1>Servo Motor Control</h1>
+  <h1>Dual Servo Motor Control</h1>
+
   <div class="slider-container">
-    <label for="servoRange">Servo Angle</label>
-    <input type="range" min="0" max="180" value="90" id="servoRange" title="Servo Angle" oninput="updateServo(this.value)">
-    <p>Angle: <span id="angleValue">90</span>°</p>
+    <label for="servo1Range">Servo 1 (Channel 0)</label>
+    <input type="range" min="0" max="180" value="90" id="servo1Range" oninput="updateServo(0, this.value)">
+    <p>Angle: <span id="angle1Value">90</span>°</p>
+  </div>
+
+  <div class="slider-container">
+    <label for="servo2Range">Servo 2 (Channel 1)</label>
+    <input type="range" min="0" max="180" value="90" id="servo2Range" oninput="updateServo(1, this.value)">
+    <p>Angle: <span id="angle2Value">90</span>°</p>
   </div>
 
   <div class="camera-feed">
@@ -36,12 +43,12 @@
   </div>
 
   <script>
-    function updateServo(angle) {
-      document.getElementById("angleValue").innerText = angle;
-      fetch(`/move/?angle=${angle}`)
+    function updateServo(channel, angle) {
+      document.getElementById(angle${channel + 1}Value).innerText = angle;
+      fetch(/move/?angle=${angle}&channel=${channel})
         .then(response => response.json())
-        .then(data => console.log(data))
-        .catch(err => console.error("Failed to send angle:", err));
+        .then(data => console.log(Servo ${channel}:, data))
+        .catch(err => console.error(Failed to send angle to servo ${channel}:, err));
     }
   </script>
 </body>
