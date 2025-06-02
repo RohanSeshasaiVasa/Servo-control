@@ -3,7 +3,7 @@ from flask import Flask, request, jsonify, Response
 import time
 import board
 import busio
-from adafruit_pca9685 import PCA9685
+from adafruit_pca9685 import PCA9685 # type: ignore
 
 import cv2
 from picamera2 import Picamera2
@@ -28,11 +28,12 @@ def angle_to_duty(angle):
 def move_servo():
     try:
         angle = int(request.args.get('angle', 90))
+        channel = int(request.args.get('channel', 0))
         duty = angle_to_duty(angle)
-        pca.channels[SERVO_CHANNEL].duty_cycle = duty
+        pca.channels[channel].duty_cycle = duty
         time.sleep(0.4)
-        pca.channels[SERVO_CHANNEL].duty_cycle = 0
-        return jsonify({'status': 'ok', 'angle': angle})
+        pca.channels[channel].duty_cycle = 0
+        return jsonify({'status': 'ok', 'angle': angle, 'channel': channel})
     except Exception as e:
         return jsonify({'status': 'error', 'message': str(e)})
 

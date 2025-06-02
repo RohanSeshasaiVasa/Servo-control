@@ -9,8 +9,9 @@ def index(request):
 
 def move_servo(request):
     angle = int(request.GET.get('angle', 90))
+    channel = int(request.GET.get('channel', 0))  # <- capture the channel
     try:
-        r = requests.get(f"{PI_IP}/servo", params={"angle": angle}, timeout=1)
+        r = requests.get(f"{PI_IP}/servo", params={"angle": angle, "channel": channel}, timeout=1)
         data = r.json()
     except Exception as e:
         data = {"status": "error", "message": str(e)}
