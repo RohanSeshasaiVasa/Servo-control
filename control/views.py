@@ -15,4 +15,4 @@ def move_servo(request):
         data = r.json()
     except Exception as e:
         data = {"status": "error", "message": str(e)}
-    return JsonResponse(data)
+    return JsonResponse(data) 

@@ -48,7 +48,7 @@
       fetch(`/move/?angle=${angle}&channel=${channel}`)
         .then(response => response.json())
         .then(data => console.log(`Servo ${channel}:`, data))
-        .catch(err => console.error(`Failed to send angle to servo ${channel}:`, err));
+      .catch(err => console.error(`Failed to send angle to servo ${channel}:`, err));
     }
   </script>
 </body>
