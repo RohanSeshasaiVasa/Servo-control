@@ -8,3 +8,7 @@
 !manage.py
 !requirements.txt
 !servo_server.py
+
+# Ignore __pycache__ in specific directories
+/servo_project/__pycache__/
+/control/__pycache__/
